@@ -1,0 +1,114 @@
+.container {
+  background-color: #ffffff; /* Equivalent to bg-white */
+    border-radius: 8px; /* Equivalent to rounded-lg */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Equivalent to shadow-md */
+    padding: 16px; /* Equivalent to p-4 */
+    width:97%;
+    margin:10px 0px 0px 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.headerTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937; /* Dark Gray */
+}
+
+.taskCount {
+  font-size: 0.875rem;
+  color: #6b7280; /* Light Gray */
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: #f3e8ff;
+  margin:1rem;
+  padding:1rem;
+  max-height: 300px; /* Set a fixed maximum height for the task list */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 0.5rem; /* Add padding to avoid content being cut off by the scrollbar */
+}
+
+/* Optional: Customize the scrollbar appearance */
+.taskList::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.taskList::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 114, 128, 0.5); /* Gray scrollbar thumb */
+  border-radius: 4px;
+}
+
+.taskList::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(107, 114, 128, 0.7); /* Darker gray on hover */
+}
+
+.taskList::-webkit-scrollbar-track {
+  background-color: #f3f4f6; /* Light gray track */
+}
+
+
+.taskCard {
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin: 0.5rem;
+  background-color: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.taskCard:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.taskDetails {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stateIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.taskTitle {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.taskTime {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.selectState {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+  font-size: 0.875rem;
+  color: #374151; /* Dark Gray */
+  background-color: white;
+  cursor: pointer;
+}
+
+.selectState:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5); /* Focus Ring */
+}
+
+.option {
+  font-size: 0.875rem;
+}

@@ -1,0 +1,162 @@
+.container {
+    padding: 2rem; /* Adjust padding for better scaling on smaller screens */
+    margin: 0 auto;
+    background-color: #f3e8ff;
+    max-width: 90%; /* Set max-width relative to the viewport for responsiveness */
+    width: 100%; /* Ensure the container spans 100% of the available width */
+    border-radius: 5px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+  }
+  
+  /* Media Query for Larger Screens */
+  @media (min-width: 768px) {
+    .container {
+      padding: 3rem;
+      max-width: 1100px; /* Restore the width for larger screens */
+    }
+  }
+  
+  /* Optional: Media Query for Extra Small Screens */
+  @media (max-width: 480px) {
+    .container {
+      padding: 1rem;
+    }
+  }
+  
+    .heading {
+      margin-bottom: 2rem;
+    }
+    
+    .title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #2d3748;
+    }
+    
+    .subtitle {
+      color: #6b7280;
+    }
+    
+    .statsGrid {
+      display: flex;
+      flex-wrap: wrap; /* Allows items to wrap if necessary */
+      justify-content: space-between; /* Distributes space between the cards */
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    
+    }
+    
+    .card {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .cardHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .cardTitle {
+      font-size: 1rem;
+      color: #6b7280;
+    }
+    
+    .cardValue {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    
+    .cardIcon {
+      padding: 0.75rem;
+      background-color: #f3e8ff;
+      border-radius: 50%;
+    }
+    
+    .cardIcon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: #6b46c1;
+    }
+    
+    .trend {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+      color: #34d399;
+      font-size: 0.875rem;
+    }
+    
+    .trendIcon {
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.25rem;
+    }
+    
+    .gridCharts {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .chartCard {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .chartTitle {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+   
+    .enrollmentsCard {
+      background-color: #f4f7fc;
+      padding: 2rem;
+      border-radius: 15px;
+     
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  
+  .cardSubtitle {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #9b72cf;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0.5rem; /* Margin to space out from the elements */
+  }
+  
+  .cardTotal {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #592e83;
+      margin: 0 0.5rem; /* Margin to space out from the elements */
+  }
+  
+  /* Aligning h4, p, p in a row */
+  .cardContent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem; /* Space between elements */
+      text-align: left; /* Align text to the left */
+  }
+  
+  @media (max-width: 768px) {
+      .enrollmentsCard {
+          max-width: 90%;
+      }
+  }

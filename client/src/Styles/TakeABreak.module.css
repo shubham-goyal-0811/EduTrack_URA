@@ -1,0 +1,136 @@
+/* Container with animated gradient background */
+.container {
+  padding: 2rem;
+  background: linear-gradient(90deg, rgba(94,34,197,1) 0%, rgba(116,64,206,1) 0%, rgba(179,133,239,1) 56%, rgba(200,166,243,1) 100%); /* Multicolor gradient */
+  background-size: 300% 300%;
+  animation: gradientShift 6s ease infinite; /* Gradient animation */
+  border-radius: 1rem;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Animated gradient shift */
+@keyframes gradientShift {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+/* Fun Fact with floating animation */
+.funFact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: floating 4s ease-in-out infinite;
+}
+
+/* Floating effect */
+@keyframes floating {
+  0% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-10px);
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
+
+/* Button with pulse animation */
+.iconButton {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  padding: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: pulse 1.5s infinite; /* Pulse effect */
+}
+
+/* Pulse effect on button */
+@keyframes pulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.iconButton:hover {
+  transform: scale(1.2);
+  background-color: #6d28d9;
+}
+
+/* Icon styling with smooth transition */
+.icon {
+  width: 40px; 
+  height: 40px;
+  color: #7c3aed;
+  transition: color 0.3s ease;
+}
+
+/* Change color of icon on button hover */
+.iconButton:hover .icon {
+  color: white;
+}
+
+/* Confetti animation (triggered on hover) */
+.iconButton:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://cdn.pixabay.com/photo/2017/03/14/22/22/celebration-2135251_960_720.png') no-repeat center center;
+  background-size: contain;
+  opacity: 0.6;
+  animation: confetti 1s ease-out forwards;
+}
+
+/* Confetti animation keyframes */
+@keyframes confetti {
+  0% {
+      transform: scale(0);
+      opacity: 1;
+  }
+  100% {
+      transform: scale(2);
+      opacity: 0;
+  }
+}
+
+/* Text shadow for the "Fun Fact" */
+.funFact:hover {
+  text-shadow: 0 0 10px rgba(227, 200, 200, 0.8);
+  transform: scale(1.05);
+}

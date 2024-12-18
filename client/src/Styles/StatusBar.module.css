@@ -1,0 +1,262 @@
+/* StatusBar container */
+.statusBar {
+  padding: 24px;
+  background-color: #f9f5ff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+/* Container for all content */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Greeting and information text */
+.greeting {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-weight: bold; /* Make the text bold */
+  color: #2d3748; /* Dark color for better contrast */
+  text-transform: uppercase; /* Make the text uppercase */
+  letter-spacing: 1px; /* Add some spacing between letters */
+  background: linear-gradient(45deg, #9b72cf,#d8c0f7); /* Cool gradient background */
+  padding: 15px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Add a subtle shadow */
+  animation: fadeInUp 0.6s ease-in-out; /* Add animation for a smooth entrance */
+}
+
+/* Animation for a smooth entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcomeText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white; /* White color for the welcome text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text shadow for better visibility */
+}
+
+.infoText {
+  font-size: 1rem;
+  color: white; /* Light purple color for the info text */
+  opacity: 0.9; /* Slightly faded effect */
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center; /* Center the content horizontally */
+  text-align: center; /* Ensure text inside the container is centered */
+  padding:30px 0px 0px 0px;
+  margin: 0 auto; /* Center the .userInfo container itself */
+}
+
+
+.avatar {
+  width: 84px; /* Increased size for the avatar */
+  height: 84px; /* Increased size for the avatar */
+  border-radius: 50%;
+  border: 2px solid #6b46c1;
+  object-fit: cover; /* Ensures image fits well inside the circle */
+}
+
+
+.roleText {
+  font-size: 1.125rem; /* Increased size */
+  color: darkgray; /* Lighter gray color */
+  margin-bottom: 10px; /* Spacing for better separation */
+  font-weight: 500;
+  opacity: 0.9; /* Slightly reduced opacity for a modern look */
+}
+
+.role {
+  font-weight: 700; /* Bold for emphasis */
+  font-size: 1.5rem; /* Large text for strong impact */
+  color: gray; /* White color for better contrast on purple background */
+  text-transform: capitalize;
+  letter-spacing: 0.5px; /* Slight letter spacing for modern look */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Stronger text shadow */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+}
+
+
+
+@media (max-width: 400px) {
+  .roleInfo {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .roleText {
+    font-size: 1rem;
+  }
+
+  .role {
+    font-size: 1.25rem;
+  }
+}
+
+
+/* General responsive adjustments */
+@media (max-width: 1024px) {
+  .statusBar {
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .container {
+    gap: 16px;
+    align-items: center; /* Center-align content on smaller screens */
+  }
+
+  .greeting {
+    font-size: 1.25rem; /* Slightly reduce text size */
+    padding: 12px;
+    text-align: center; /* Center text */
+  }
+
+  .welcomeText {
+    font-size: 1.25rem;
+  }
+
+  .infoText {
+    font-size: 0.9rem;
+  }
+
+  .userInfo {
+    flex-direction: column; /* Stack avatar and text vertically */
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .roleText {
+    font-size: 1rem;
+  }
+
+  .role {
+    font-size: 1.25rem;
+  }
+}
+
+/* Adjustments for tablets and smaller devices */
+@media (max-width: 768px) {
+  .statusBar {
+    padding: 12px;
+  }
+
+  .greeting {
+    padding: 10px;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .userInfo {
+    gap: 8px;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .roleText {
+    font-size: 0.9rem;
+  }
+
+  .role {
+    font-size: 1.125rem;
+  }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+  .statusBar {
+    padding: 8px;
+    border-radius: 6px;
+  }
+
+  .greeting {
+    font-size: 0.875rem;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .welcomeText {
+    font-size: 1rem;
+  }
+
+  .infoText {
+    font-size: 0.75rem;
+  }
+
+  .userInfo {
+    gap: 6px;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .roleText {
+    font-size: 0.8rem;
+  }
+
+  .role {
+    font-size: 1rem;
+  }
+}
+
+/* Smallest screens */
+@media (max-width: 360px) {
+  .greeting {
+    padding: 6px;
+    font-size: 0.8rem;
+    text-transform: none; /* Remove uppercase for readability */
+    letter-spacing: 0.25px;
+  }
+
+  .welcomeText {
+    font-size: 0.875rem;
+  }
+
+  .infoText {
+    font-size: 0.75rem;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .roleText {
+    font-size: 0.75rem;
+  }
+
+  .role {
+    font-size: 0.9rem;
+  }
+}

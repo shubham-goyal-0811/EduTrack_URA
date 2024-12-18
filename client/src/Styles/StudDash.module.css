@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #d8c0f7;
+}
+
+.mainContent {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+/* Grid layout */
+.grid {
+  display: grid;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.gridTwoCols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.cardTall {
+  height: 400px;
+}
+
+.cardWide {
+  grid-column: span 2;
+}
+
+.dictionary {
+  width:82vw;
+  margin-left:-15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .gridTwoCols {
+      grid-template-columns: 1fr;
+  }
+}

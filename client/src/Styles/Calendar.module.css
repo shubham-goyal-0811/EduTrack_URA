@@ -1,0 +1,142 @@
+.calendarContainer {
+  width:100%;
+  height: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f9f5ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 0 8px;
+}
+
+.monthTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.navButton {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ffbf69;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.navButton:hover {
+  background-color: #ffa94d;
+  transform: scale(1.1);
+}
+
+.weekdaysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  margin-bottom: 8px;
+  background-color: #9b72cf;
+  border-radius: 5px;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  color: white;
+  font-size: 0.8rem;
+  padding: 5px 0;
+  border-radius: 5px;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.calendarDay {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.calendarDay:hover:not(:empty) {
+  background-color:  #ffbf69;
+  border-color: #ddd;
+}
+
+.today {
+  background-color: #ff9f1c;
+  color: white;
+  font-weight: bold;
+  border-color: #ffbf69;
+}
+
+.today:hover {
+  background-color: #ffa94d !important;
+  border-color: #ffa94d !important;
+}
+
+
+@media (max-width: 400px) {
+  .calendarContainer {
+    width: 95%;
+    padding: 8px;
+  }
+
+  .calendarDay {
+    font-size: 0.7rem;
+  }
+
+  .weekday {
+    font-size: 0.7rem;
+  }
+}
+
+
+.calendarDay {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.selected {
+  background-color: #ffd699;
+  border-color: #ffbf69;
+}
+
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

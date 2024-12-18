@@ -1,0 +1,56 @@
+/* General styles */
+.container {
+    display: flex;
+    height: 100vh;
+    width:100vw;
+    background-color: #d8c0f7; /* Equivalent to bg-gray-100 */
+  }
+  
+  .sidebar {
+    flex-shrink: 0;
+  }
+  
+  .mainContent {
+    flex: 1;
+    overflow: auto;
+  }
+  
+  /* Dashboard grid layout */
+  .grid {
+    display: grid;
+    gap: 24px; /* Equivalent to gap-6 */
+    padding: 0px 24px; 
+  }
+  
+  .gridTwoCols {
+    grid-template-columns: repeat(2, 1fr); /* Equivalent to grid-cols-2 */
+  }
+  
+  .card {
+    background-color: #ffffff; /* Equivalent to bg-white */
+    border-radius: 8px; /* Equivalent to rounded-lg */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Equivalent to shadow-md */
+    padding: 16px; /* Equivalent to p-4 */
+  }
+  
+  .cardTall {
+    height: 400px; /* Equivalent to h-[400px] */
+  }
+  
+  .cardWide {
+    grid-column: span 2; /* Equivalent to col-span-12 */
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .gridResponsive {
+      grid-template-columns: repeat(2, 1fr); /* Equivalent to md:grid-cols-2 */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .gridResponsiveLg {
+      grid-template-columns: repeat(4, 1fr); /* Equivalent to lg:grid-cols-4 */
+    }
+  }
+  
