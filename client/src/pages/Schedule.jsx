@@ -10,6 +10,11 @@ const Schedule = () => {
   const [endTime, setEndTime] = useState("");
   const [tasks, setTasks] = useState([]);
 
+  useEffect(() => {
+    
+    fetchTasks();
+  }, []);
+
   const handleSubmit = async(e) => {
     e.preventDefault();
 
@@ -31,7 +36,7 @@ const Schedule = () => {
       }
     });
     console.log(res);
-
+    fetchTasks();
     setTaskName("");
     setDescription("");
     setStartTime("");
@@ -51,8 +56,8 @@ const Schedule = () => {
     const name = task.name;
     console.log(event.target.value);
     console.log(task.status);
-    if (event.target.value === "Started" && task.status === "pending") {
-      console.log("I am in Started");
+    if (event.target.value === "in-progress" && task.status === "pending") {
+      // console.log("I am in Started");
       API.post('/user/startDoingTask', { userId, date, name }, {
       headers: {
         'token': localStorage.getItem('token'),
@@ -93,35 +98,31 @@ const Schedule = () => {
     setTasks([]);
   }
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const data = {
-        userId: user._id,
-        date: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }).split(",")[0],
-      };
-      const res = await API.post('/user/getTimeTable',data,{
-        headers:{
-          'token' : localStorage.getItem('token'),
-        }
-      })
-      // console.log(res);
-      const variableTest = await res.data.timeTable;
-      // console.log(variableTest);
-      if (res.status !== 200) {
-        alert("Tasks could not be fetched. Please try again later.");
-        return;
-      }
-      // // alert(response.timeTable);
-      if(variableTest.length > 0){
-        const task = variableTest[0].tasks;
-        console.log("here are my tasks")
-        console.log(task);
-        setTasks(task);
-      }
+  const fetchTasks = async () => {
+    const data = {
+      userId: user._id,
+      date: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }).split(",")[0],
     };
-
-    fetchTasks();
-  }, []);
+    const res = await API.post('/user/getTimeTable',data,{
+      headers:{
+        'token' : localStorage.getItem('token'),
+      }
+    })
+    // console.log(res);
+    const variableTest = await res.data.timeTable;
+    // console.log(variableTest);
+    if (res.status !== 200) {
+      alert("Tasks could not be fetched. Please try again later.");
+      return;
+    }
+    // // alert(response.timeTable);
+    if(variableTest.length > 0){
+      const task = variableTest[0].tasks;
+      console.log("here are my tasks")
+      console.log(task);
+      setTasks(task);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -194,8 +195,7 @@ const Schedule = () => {
         <div className={styles.taskList}>
           <h3>Planned Activitites</h3>
           {tasks.map((task, index) => (
-            console.log("here are my tasks in map"),
-            console.log(task.status),
+            
             <div key={index} className={styles.taskItem}>
               <div className={styles.taskDetails}>
                 <h4 className={styles.taskName}>{task.name}</h4>
@@ -208,19 +208,31 @@ const Schedule = () => {
               </div>
     
                 <div className={styles.statusContainer}>
-                  <label>
-                    <select 
-                      value={task.status}
-                      onChange={(e)=>handleTaskStatusChange(index,e)}
-                      className={styles.statusDropdown}
-                    >
-                    <option value={task.status}>{task.status}</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Started">Started</option>
-                    <option value="Completed">Completed</option>
-                    </select>
-                    
-                  </label>
+                  {task.status === "pending" ? (
+                    <label>
+                      <select 
+                        value={task.status}
+                        onChange={(e)=>handleTaskStatusChange(index,e)}
+                        className={styles.statusDropdown}
+                      >
+                      <option value={task.status}>{task.status}</option>
+                      <option value="in-progress">Started</option>
+                      </select>
+                    </label>
+                  ) : task.status === "in-progress" ? (
+                    <label>
+                      <select 
+                        value={task.status}
+                        onChange={(e)=>handleTaskStatusChange(index,e)}
+                        className={styles.statusDropdown}
+                      >
+                      <option value={task.status}>Started</option>
+                      <option value="Completed" >Completed</option>
+                      </select>
+                    </label>
+                  ) : (
+                    <div style={{ width: '100px', textAlign: 'center', backgroundColor: '#d4edda', borderRadius: '4px', fontSize: '15px' }}>Completed</div>
+                  )}
                 </div>
                 <button className={styles.removeButton}
                 onClick={()=>handleRemoveTask(index)}>
