@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CourseData } from "../../context/CourseContext";
 import CourseCard from "../../components/Courses/CourseCard";
@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { createCourse } from '../../services/courseRoutes';
+import { UserData } from "@/context/UserContext";
 
 const categories = [
   "Web Development",
@@ -22,11 +23,11 @@ const categories = [
   "Artificial Intelligence",
 ];
 
-const AdminCourses = ({ user }) => {
+const AdminCourses = () => {
   const navigate = useNavigate();
-
-  if (user && user.role !== "admin") return navigate("/");
-
+  let {user} = UserData();
+  if (user && user.role !== "teacher") return navigate("/");
+  console.log(user);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -36,6 +37,20 @@ const AdminCourses = ({ user }) => {
   const [image, setImage] = useState("");
   const [imagePrev, setImagePrev] = useState("");
   const [btnLoading, setBtnLoading] = useState(false);
+
+  const { courses, fetchCourses } = CourseData();
+    
+  
+    useEffect(() => {
+      
+      if (!(courses.length > 0)) {
+        fetchData(user);
+      }
+    }, []);
+
+    const fetchData = async () => {
+      await fetchCourses(user);
+    };
 
   const changeImageHandler = (e) => {
     const file = e.target.files[0];
@@ -49,7 +64,7 @@ const AdminCourses = ({ user }) => {
     };
   };
 
-  const { courses, fetchCourses } = CourseData();
+  // const { courses, fetchCourses } = CourseData();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -61,7 +76,7 @@ const AdminCourses = ({ user }) => {
     myForm.append("description", description);
     myForm.append("category", category);
     myForm.append("price", price);
-    myForm.append("createdBy", createdBy);
+    myForm.append("createdBy", "none");
     myForm.append("duration", duration);
     myForm.append("file", image);
     
@@ -154,7 +169,7 @@ const { data } = await API.post(`/course/new`, myForm, {
                 />
               </div>
 
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="createdBy">Created By</Label>
                 <Input
                   id="createdBy"
@@ -162,7 +177,8 @@ const { data } = await API.post(`/course/new`, myForm, {
                   onChange={(e) => setCreatedBy(e.target.value)}
                   required
                 />
-              </div>
+              </div> */}
+              
 
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>

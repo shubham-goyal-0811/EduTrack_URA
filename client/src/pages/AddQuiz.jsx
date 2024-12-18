@@ -4,22 +4,22 @@ import c from "../Styles/AddQuiz.module.css";
 import API from "@/services/api";
 import { CourseData } from "@/context/CourseContext";
 import { UserData } from "@/context/UserContext";
-import {toast} from 'sonner';
+import { toast } from "sonner";
 
 const AddQuiz = () => {
-  const {courses,fetchCourses} = CourseData();
-  const {user} = UserData();
-  useEffect(()=>{
-    if(!(courses.length > 0) ){
+  const { courses, fetchCourses } = CourseData();
+  const { user } = UserData();
+
+  useEffect(() => {
+    if (!(courses.length > 0)) {
       fetchData(user);
     }
-  },[])
-  
+  }, []);
+
   const fetchData = async () => {
     await fetchCourses(user);
- }
+  };
 
-  console.log(courses);
   const [quiz, setQuiz] = useState({
     title: "",
     description: "",
@@ -54,30 +54,89 @@ const AddQuiz = () => {
     setQuestion({ ...question, options: updatedOptions });
   };
 
+  const addNewQuestion = () => {
+    setQuestion({ s_no: "", question: "", options: ["", "", "", ""], correctAnswer: "" });
+  };
+
   const addQuestion = () => {
+    if (!question.question.trim()) {
+      alert("Please provide a question.");
+      return;
+    }
+
+    const isOptionsValid = question.options.some((option) => option.trim());
+    if (!isOptionsValid) {
+      alert("Please provide at least one valid option.");
+      return;
+    }
+
+    if (!question.correctAnswer || question.correctAnswer < 1 || question.correctAnswer > 4) {
+      alert("Please provide a valid correct answer (1 to 4).");
+      return;
+    }
+
     setQuiz({
       ...quiz,
       questions: [...quiz.questions, { ...question, s_no: quiz.questions.length + 1 }],
     });
-    setQuestion({ s_no: "", question: "", options: ["", "", "", ""], correctAnswer: "" });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!quiz.correctMarks || quiz.correctMarks <= 0) {
+      alert("Correct Marks must be a positive number.");
+      return;
+    }
+
+    if (quiz.incorrectMarks === "" || quiz.incorrectMarks < 0) {
+      alert("Incorrect Marks cannot be negative.");
+      return;
+    }
+
+    if (!quiz.loginWindow || quiz.loginWindow <= 0) {
+      alert("Login Window must be a positive number.");
+      return;
+    }
+
+    if (!quiz.startTime) {
+      alert("Please provide a valid Start Time.");
+      return;
+    }
+
+    if (new Date(quiz.startTime) <= new Date()) {
+      alert("Start Time must be in the future.");
+      return;
+    }
+
     try {
-      console.log(quiz);
-      const response = await API.post("/quiz/generate", quiz,{
+      const response = await API.post("/quiz/generate", quiz, {
         headers: {
-          'token': localStorage.getItem('token')
-        }
+          token: localStorage.getItem("token"),
+        },
       });
-      console.log("Quiz generated successfully:", response.data);
+
       toast.success(response.data.message);
-      // Optionally, reset the form or show a success message
+
+      setQuiz({
+        title: "",
+        description: "",
+        course: "",
+        questions: [],
+        correctMarks: "",
+        incorrectMarks: "",
+        startTime: "",
+        loginWindow: "",
+      });
+
+      setQuestion({
+        s_no: "",
+        question: "",
+        options: ["", "", "", ""],
+        correctAnswer: "",
+      });
     } catch (error) {
-      toast.error(error);
-      console.error("Error generating quiz:", error);
-      // Optionally, show an error message
+      toast.error("Error generating quiz: " + error.message);
     }
   };
 
@@ -89,21 +148,24 @@ const AddQuiz = () => {
           <div>
             <label className={c["add-quiz-label"]}>Title:</label>
             <input
-              className={c["add-quiz-input"]} type="text" name="title" value={quiz.title} onChange={handleQuizChange} required
+              className={c["add-quiz-input"]}
+              type="text"
+              name="title"
+              value={quiz.title}
+              onChange={handleQuizChange}
+              required
             />
           </div>
           <div>
             <label className={c["add-quiz-label"]}>Description:</label>
             <textarea
-              className={c["add-quiz-input"]} name="description" value={quiz.description} onChange={handleQuizChange} required
+              className={c["add-quiz-input"]}
+              name="description"
+              value={quiz.description}
+              onChange={handleQuizChange}
+              required
             />
           </div>
-          {/* <div>
-            <label className={c["add-quiz-label"]}>Course name:</label>
-            <input
-              className={c["add-quiz-input"]} type="text" name="course" value={quiz.course} onChange={handleQuizChange} required
-            />
-          </div> */}
           <div>
             <label className={c["add-quiz-label"]}>Course name:</label>
             <select
@@ -118,34 +180,53 @@ const AddQuiz = () => {
               </option>
               {courses.map((course) => (
                 <option key={course._id} value={course._id}>
-                  {course.title} 
+                  {course.title}
                 </option>
               ))}
             </select>
           </div>
-
           <div>
             <label className={c["add-quiz-label"]}>Correct Marks:</label>
             <input
-              className={c["add-quiz-input"]} type="number" name="correctMarks" value={quiz.correctMarks} onChange={handleQuizChange} required
+              className={c["add-quiz-input"]}
+              type="number"
+              name="correctMarks"
+              value={quiz.correctMarks}
+              onChange={handleQuizChange}
+              required
             />
           </div>
           <div>
             <label className={c["add-quiz-label"]}>Incorrect Marks:</label>
             <input
-              className={c["add-quiz-input"]} type="number" name="incorrectMarks" value={quiz.incorrectMarks} onChange={handleQuizChange} required
+              className={c["add-quiz-input"]}
+              type="number"
+              name="incorrectMarks"
+              value={quiz.incorrectMarks}
+              onChange={handleQuizChange}
+              required
             />
           </div>
           <div>
             <label className={c["add-quiz-label"]}>Start Time:</label>
             <input
-              className={c["add-quiz-input"]} type="datetime-local" name="startTime" value={quiz.startTime} onChange={handleQuizChange} required
+              className={c["add-quiz-input"]}
+              type="datetime-local"
+              name="startTime"
+              value={quiz.startTime}
+              onChange={handleQuizChange}
+              required
             />
           </div>
           <div>
             <label className={c["add-quiz-label"]}>Login Window (in minutes):</label>
             <input
-              className={c["add-quiz-input"]} type="number" name="loginWindow" value={quiz.loginWindow} onChange={handleQuizChange} required
+              className={c["add-quiz-input"]}
+              type="number"
+              name="loginWindow"
+              value={quiz.loginWindow}
+              onChange={handleQuizChange}
+              required
             />
           </div>
 
@@ -153,25 +234,41 @@ const AddQuiz = () => {
           <div>
             <label className={c["add-quiz-label"]}>Question:</label>
             <textarea
-              className={c["add-quiz-input"]} name="question" value={question.question} onChange={handleQuestionChange} required
+              className={c["add-quiz-input"]}
+              name="question"
+              value={question.question}
+              onChange={handleQuestionChange}
+              required
             />
           </div>
           {question.options.map((option, index) => (
             <div key={index}>
               <label className={c["add-quiz-label"]}>Option {index + 1}:</label>
               <input
-                className={c["add-quiz-input"]} type="text" value={option} onChange={(e) => handleOptionChange(index, e.target.value)} required
+                className={c["add-quiz-input"]}
+                type="text"
+                value={option}
+                onChange={(e) => handleOptionChange(index, e.target.value)}
+                required
               />
             </div>
           ))}
           <div>
             <label className={c["add-quiz-label"]}>Correct Answer (Option Number):</label>
             <input
-              className={c["add-quiz-input"]} type="number" name="correctAnswer" value={question.correctAnswer} onChange={handleQuestionChange} required
+              className={c["add-quiz-input"]}
+              type="number"
+              name="correctAnswer"
+              value={question.correctAnswer}
+              onChange={handleQuestionChange}
+              required
             />
           </div>
           <button className={c["add-quiz-button"]} type="button" onClick={addQuestion}>
-            Add Question
+            Add this Question
+          </button>
+          <button className={c["add-quiz-button"]} type="button" onClick={addNewQuestion}>
+            Add New Question
           </button>
 
           <h3 className={c["add-quiz-heading"]}>Questions Preview</h3>

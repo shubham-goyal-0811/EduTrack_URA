@@ -71,10 +71,12 @@
   display: block;
   width: 100%;
   margin-top: 10px;
+  transition: background-color 0.3s ease, border-radius 0.3s ease;
 }
 
 .add-quiz-button:hover {
   background-color: #592e83; /* Slightly darker purple on hover */
+  border-radius: 3em;
 }
 
 /* Questions Preview */
