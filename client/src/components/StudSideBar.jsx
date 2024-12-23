@@ -38,7 +38,7 @@ const StudSideBar = ({ setTabContent }) => {
 
   return (
     <Sidebar className={s["sidebar"]}>
-      <SidebarHeader className={s["sidebar-header"]}>My App</SidebarHeader>
+      <SidebarHeader className={s["sidebar-header"]}>EduTrack</SidebarHeader>
       <SidebarContent className={s["sidebar-content"]}>
         <SidebarGroup className={s["sidebar-group"]}>
           <Button

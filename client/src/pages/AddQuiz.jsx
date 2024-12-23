@@ -70,15 +70,17 @@ const AddQuiz = () => {
       return;
     }
 
-    if (!question.correctAnswer || question.correctAnswer < 1 || question.correctAnswer > 4) {
+    if (!question.correctAnswer || parseInt(question.correctAnswer) < 0 || parseInt(question.correctAnswer) > 4) {
       alert("Please provide a valid correct answer (1 to 4).");
       return;
     }
 
+    question.correctAnswer = parseInt(question.correctAnswer) - 1;
     setQuiz({
       ...quiz,
       questions: [...quiz.questions, { ...question, s_no: quiz.questions.length + 1 }],
     });
+    toast.success("Question added successfully");
   };
 
   const handleSubmit = async (e) => {
@@ -89,8 +91,8 @@ const AddQuiz = () => {
       return;
     }
 
-    if (quiz.incorrectMarks === "" || quiz.incorrectMarks < 0) {
-      alert("Incorrect Marks cannot be negative.");
+    if (quiz.incorrectMarks === "" || quiz.incorrectMarks > 0) {
+      alert("Incorrect marks should be negative.");
       return;
     }
 

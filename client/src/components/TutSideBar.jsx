@@ -36,7 +36,7 @@ const TutSideBar = ({setTabContent}) => {
 
   return (
     <Sidebar className={c["sidebar"]}>
-      <SidebarHeader className={c["sidebar-header"]}>My App</SidebarHeader>
+      <SidebarHeader className={c["sidebar-header"]}>EduTrack</SidebarHeader>
       <SidebarContent className={c["sidebar-content"]}>
       
         <SidebarGroup className={c["sidebar-group"]}>
